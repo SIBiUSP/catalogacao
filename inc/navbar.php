@@ -5,20 +5,22 @@
           Início
         </a>
         <div class="right menu">  
+            <!--
             <div class="ui category search item">
                 <div class="ui transparent icon input">
                   <input class="prompt" placeholder="Buscar..." type="text">
                   <i class="search link icon"></i>
                 </div>
                 <div class="results"></div>
-            </div>      
-            <div class="ui dropdown item">
-              Idioma <i class="dropdown icon"></i>
-              <div class="menu">
-                <a class="item">Português</a>
-                <a class="item">Inglês</a>
-              </div>
             </div>
+                <div class="ui dropdown item">
+                  Idioma <i class="dropdown icon"></i>
+                  <div class="menu">
+                    <a class="item">Português</a>
+                    <a class="item">Inglês</a>
+                  </div>
+                </div>
+            -->
             <a class="item" href="contato.php">
               Contato
             </a>
@@ -38,13 +40,14 @@
           Início
         </a>
         <div class="right menu">  
+            <!--
             <div class="ui category search item">
                 <div class="ui transparent icon input">
                   <input class="prompt" placeholder="Buscar..." type="text">
                   <i class="search link icon"></i>
                 </div>
                 <div class="results"></div>
-            </div>      
+            </div>
             <div class="ui dropdown item">
               Idioma <i class="dropdown icon"></i>
               <div class="menu">
@@ -52,6 +55,7 @@
                 <a class="item">Inglês</a>
               </div>
             </div>
+            -->
             <a class="item" href="contato.php">
               Contato
             </a>
