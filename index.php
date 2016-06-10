@@ -25,8 +25,10 @@
                                 <!-- <option value="aleph50018.pucsp.br:9992/psp01">PUCSP</option> -->
                             </select>
                         </div>
+                        <!--
                         <label>RPN Query:</label>
                         <input type="text" size="30" name="query" />
+                        -->
                         <label>ISBN</label>
                         <input type="text" size="13" name="isbn" />
                         <br/><br/>
