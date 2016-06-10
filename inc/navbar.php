@@ -4,9 +4,6 @@
         <a class="item" href="index.php">
           Início
         </a>
-        <a class="item">
-          Link
-        </a>
         <div class="right menu">  
             <div class="ui category search item">
                 <div class="ui transparent icon input">
@@ -39,9 +36,6 @@
     <div class="ui inverted secondary menu">
         <a class="item" href="index.php">
           Início
-        </a>
-        <a class="item">
-          Link
         </a>
         <div class="right menu">  
             <div class="ui category search item">
