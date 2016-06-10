@@ -9,7 +9,7 @@
 
 <html>
     <head>
-        <title>Framework de Catalogação</title>
+        <title>Resultado da Busca - Framework de Catalogação</title>
         <?php include('inc/meta-header.php'); ?>
         <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
         <script>
