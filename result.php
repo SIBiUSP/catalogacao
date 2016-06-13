@@ -61,7 +61,15 @@ if (count($host) == 0) {
             case "library.ox.ac.uk:210/aleph":
                 echo '<h3>University of Oxford:';
                 break;
+            case "ringding.law.yale.edu:210/INNOPAC":
+                echo '<h3>Yale Law School:';
+                break;
+            case "newton.lib.cam.ac.uk:7090/VOYAGER":
+                echo '<h3>University of Cambridge:';
+                break;
         }
+        
+        
         
 
         $error = yaz_error($id[$i]);
@@ -69,7 +77,7 @@ if (count($host) == 0) {
             echo "Error: $error";
         } else {
             $hits = yaz_hits($id[$i]);
-            echo " $hits resultados </h3>";
+            echo " $hits resultado(s) </h3>";
         }
 
         for ($p = 1; $p <= 10; $p++) {
