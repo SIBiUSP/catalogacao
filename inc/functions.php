@@ -1,4 +1,4 @@
-<?php    
+<?php
 
 
 function query_isbn($isbn,$num_hosts,$host) {
@@ -25,8 +25,8 @@ function query_isbn($isbn,$num_hosts,$host) {
                 break;
             case "sirsi.library.utoronto.ca:2200":
                 echo '<h3>University of Toronto:';
-                break;                
-                
+                break;
+
             case "ilsz3950.nlm.nih.gov:7091/VOYAGER":
                 echo '<h3>U.S. National Library of Medicine (NLM):';
                 break;
@@ -58,15 +58,15 @@ function query_isbn($isbn,$num_hosts,$host) {
         }
 
         for ($p = 1; $p <= 10; $p++) {
-            
+
             if ($host[$i] == "lx2.loc.gov:210/LCDB") {
                 $rec_download = yaz_record($id[$i], $p, "raw");
-                
+
             } else {
                 $rec_download = yaz_record($id[$i], $p, "raw");
             }
-            
-            
+
+
             $rec = yaz_record($id[$i], $p, "string");
             if (empty($rec)) continue;
 
@@ -125,21 +125,21 @@ function query_doi($doi) {
     $url = "https://api.crossref.org/v1/works/http://dx.doi.org/$doi";
     $json = file_get_contents($url);
     $data = json_decode($json, TRUE);
-    
+
     echo '<h2>Resultados de busca pelo DOI: ' . htmlspecialchars($data["message"]["DOI"]) . '</h2>';
-    
+
     echo '<b>Título:</b> '.$data["message"]["title"][0].'</br>';
     foreach ($data["message"]["author"] as $authors) {
         echo '<b>Autor:</b> '.$authors["family"].', '.$authors["given"].'</br>';
     }
-    
+
     echo '<b>Periódico:</b> '.$data["message"]["container-title"][0].'</br>';
     echo '<b>ISSN:</b> '.$data["message"]["ISSN"][0].'</br>';
-    
-    
-    
+
+
+
     $author_number = count($data["message"]["author"]);
-    
+
 
     $record = [];
     $record[] = "000000001 FMT   L BK";
@@ -150,62 +150,74 @@ function query_doi($doi) {
     $record[] = "000000001 040   L \$\$aUSP/SIBI";
     $record[] = '000000001 0410  L \$\$a';
     $record[] = '000000001 044   L \$\$a';
-    
+
     if ($author_number > 1) {
-        if (!empty($data["message"]["author"][0]["affiliation"])) {
-            $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'\$\$8'.$data["message"]["author"][0]["affiliation"].'';
-        } else {
-            $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'';
-        }
-        } else {
+
+      if (!empty($data["message"]["author"][0]["affiliation"])) {
+          $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'\$\$8'.$data["message"]["author"][0]["affiliation"][0].'';
+      } else {
+          $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'';
+      }
+
         for ($i = 1; $i < $author_number; $i++) {
-             if (!empty($data["message"]["author"][$i]["affiliation"])) {
-                 $record[] = '000000001 7001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'\$\$8'.$data["message"]["author"][$i]["affiliation"].'';
-         } else {   
-            $record[] = '000000001 7001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'';
+
+          if (!empty($data["message"]["author"][$i]["affiliation"])) {
+              $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'\$\$8'.$data["message"]["author"][$i]["affiliation"][0].'';
+          } else {
+              $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'';            
+          }
+
+         }
+        } else {
+
+          if (!empty($data["message"]["author"][0]["affiliation"])) {
+              $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'\$\$8'.$data["message"]["author"][0]["affiliation"][0].'';
+          } else {
+              $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'';
+          }
+
+
+
         }
-    
-        $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][0]["family"].', '.$data["message"]["author"][0]["given"].'';
-    }}
-    
+
     if (!empty($data["message"]["container-title"][1])) {
         $record[] = '000000001 7730  L \$\$t'.$data["message"]["container-title"][1].'\$\$x'.$data["message"]["ISSN"][0].'\$\$hv.'.$data["message"]["volume"].', n.'.$data["message"]["issue"].', p.'.$data["message"]["page"].', '.$data["message"]["issued"]["date-parts"][0][0].'';
     } else {
         $record[] = '000000001 7730  L \$\$t'.$data["message"]["container-title"][0].'\$\$x'.$data["message"]["ISSN"][0].'\$\$hv.'.$data["message"]["volume"].', n.'.$data["message"]["issue"].', p.'.$data["message"]["page"].', '.$data["message"]["issued"]["date-parts"][0][0].'';
     }
-    
+
     $record[] = '000000001 24510 L \$\$a'.$data["message"]["title"][0].'';
     $record[] = '000000001 260   L \$\$b'.$data["message"]["publisher"].'\$\$c'.$data["message"]["issued"]["date-parts"][0][0].'';
     $record[] = '000000001 300   L \$\$ap.'.$data["message"]["page"].'';
     $record[] = '000000001 500   L \$\$aDisponível em:<http://dx.doi.org'.$data["message"]["DOI"].'>. Acesso em:';
-    
+
     foreach ($data["message"]["funder"] as $funder) {
         if (!empty($funder["award"])){
-          $record[] = '000000001 536   L \$\$a'.$funder["name"].'\$\$f'.$funder["award"][0].'';  
+          $record[] = '000000001 536   L \$\$a'.$funder["name"].'\$\$f'.$funder["award"][0].'';
         } else {
             $record[] = '000000001 536   L \$\$a'.$funder["name"].'';
-        }    
+        }
     }
-        
+
     $record[] = '000000001 6507  L \$\$a';
     $record[] = '000000001 8564  L \$\$zClicar sobre o botão para acesso ao texto completo\$\$uhttp://dx.doi.org'.$data["message"]["DOI"].'\$\$3DOI';
     $record[] = '000000001 945   L \$\$aP\$\$bARTIGO DE PERIODICO\$\$c01\$\$j'.$data["message"]["issued"]["date-parts"][0][0].'\$\$l';
     $record[] = '000000001 946   L \$\$a';
-    
+
     if (!empty($cursor_ris["result"][0]['year'])) {
     $record[] = "PY  - ".$cursor_ris["result"][0]['year']."";
     }
-    
+
     $record_blob = implode("\\n", $record);
-    
+
     echo '<h3>Exportar</h3>';
     echo '<button  class="ui blue label" onclick="SaveAsFile(\''.$record_blob.'\',\'aleph.seq\',\'text/plain;charset=utf-8\')">Baixar ALEPH Sequencial</button>';
-    
-    echo '<br/><br/><br/>';
-    
 
     echo '<br/><br/><br/>';
-    
+
+
+    echo '<br/><br/><br/>';
+
 
 }
 
@@ -246,7 +258,7 @@ function parse_usmarc_string($record){
         }
         return $ret;
     }
-     
+
     // fetches the value of a certain subfield given its label
     function get_subfield_value($parts, $subfield_label){
         $ret = "";
@@ -255,7 +267,7 @@ function parse_usmarc_string($record){
                 $ret = substr($subfield,2);
         return $ret;
     }
-     
+
     // wrapper function for trim to pass it to array_walk
     function custom_trim(& $value, & $key){
         $value = trim($value);
