@@ -17,11 +17,11 @@
                             <select multiple="" class="ui dropdown" name="host[]">
                                 <option value="">Selecione ao menos uma fonte</option>
                                 <option value="dedalus.usp.br:9991/usp01" selected>USP - Dedalus</option>
+                                <!-- <option value="biblioteca2.senado.leg.br:9992/sen01">Biblioteca do Senado</option> -->
                                 <option value="marte.biblioteca.upm.es:2200" selected>Universidade de Madrid</option>  
                                 <option value="lx2.loc.gov:210/LCDB" selected>Library of Congress</option>  
                                 <option value="ilsz3950.nlm.nih.gov:7091/VOYAGER" selected>U.S. National Library of Medicine (NLM)</option>
                                 <option value="sirsi.library.utoronto.ca:2200" selected>University of Toronto</option>                               
-                                <!-- <option value="z3950.loc.gov:7090/voyager" selected>Library of Congress</option> -->
                                 <!-- <option value="146.164.2.115:9991/UFR01">UFRJ - Minerva</option> -->
                                 <option value="168.176.5.96:9991/SNB01" selected>UNAL - Universidade Nacional de Colombia</option>
                                 <option value="athena.biblioteca.unesp.br:9992/uep01" selected>UNESP - Athena</option>

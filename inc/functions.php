@@ -61,9 +61,11 @@ function query_isbn($isbn,$num_hosts,$host) {
 
             if ($host[$i] == "lx2.loc.gov:210/LCDB") {
                 $rec_download = yaz_record($id[$i], $p, "raw");
+                $rec_download = str_replace('"','',$rec_download);
 
             } else {
                 $rec_download = yaz_record($id[$i], $p, "raw");
+                $rec_download = str_replace('"','',$rec_download);
             }
 
 
@@ -162,9 +164,9 @@ function query_doi($doi) {
         for ($i = 1; $i < $author_number; $i++) {
 
           if (!empty($data["message"]["author"][$i]["affiliation"])) {
-              $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'\$\$8'.$data["message"]["author"][$i]["affiliation"][0].'';
+              $record[] = '000000001 7001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'\$\$8'.$data["message"]["author"][$i]["affiliation"][0].'';
           } else {
-              $record[] = '000000001 1001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'';            
+              $record[] = '000000001 7001  L \$\$a'.$data["message"]["author"][$i]["family"].', '.$data["message"]["author"][$i]["given"].'';            
           }
 
          }
