@@ -17,6 +17,9 @@ function query_isbn($isbn,$num_hosts,$host) {
             case "dedalus.usp.br:9991/usp01":
                 echo '<h3>USP - DEDALUS:';
                 break;
+            case "biblioteca2.senado.leg.br:9992/sen01":
+                echo '<h3>Biblioteca do Senado:';
+                break;                
             case "lx2.loc.gov:210/LCDB":
                 echo '<h3>Library of Congress:';
                 break;
@@ -191,7 +194,7 @@ function query_doi($doi) {
     $record[] = '000000001 24510 L \$\$a'.$data["message"]["title"][0].'';
     $record[] = '000000001 260   L \$\$b'.$data["message"]["publisher"].'\$\$c'.$data["message"]["issued"]["date-parts"][0][0].'';
     $record[] = '000000001 300   L \$\$ap.'.$data["message"]["page"].'';
-    $record[] = '000000001 500   L \$\$aDisponível em:<http://dx.doi.org'.$data["message"]["DOI"].'>. Acesso em:';
+    $record[] = '000000001 500   L \$\$aDisponível em:<http://dx.doi.org/'.$data["message"]["DOI"].'>. Acesso em:';
 
     foreach ($data["message"]["funder"] as $funder) {
         if (!empty($funder["award"])){
@@ -201,8 +204,8 @@ function query_doi($doi) {
         }
     }
 
-    $record[] = '000000001 6507  L \$\$a';
-    $record[] = '000000001 8564  L \$\$zClicar sobre o botão para acesso ao texto completo\$\$uhttp://dx.doi.org'.$data["message"]["DOI"].'\$\$3DOI';
+    $record[] = '000000001 650 7 L \$\$a';
+    $record[] = '000000001 8564  L \$\$zClicar sobre o botão para acesso ao texto completo\$\$uhttp://dx.doi.org/'.$data["message"]["DOI"].'\$\$3DOI';
     $record[] = '000000001 945   L \$\$aP\$\$bARTIGO DE PERIODICO\$\$c01\$\$j'.$data["message"]["issued"]["date-parts"][0][0].'\$\$l';
     $record[] = '000000001 946   L \$\$a';
 

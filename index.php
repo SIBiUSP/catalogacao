@@ -17,7 +17,7 @@
                             <select multiple="" class="ui dropdown" name="host[]">
                                 <option value="">Selecione ao menos uma fonte</option>
                                 <option value="dedalus.usp.br:9991/usp01" selected>USP - Dedalus</option>
-                                <!-- <option value="biblioteca2.senado.leg.br:9992/sen01">Biblioteca do Senado</option> -->
+                                <option value="biblioteca2.senado.leg.br:9992/sen01">Biblioteca do Senado</option>
                                 <option value="marte.biblioteca.upm.es:2200" selected>Universidade de Madrid</option>  
                                 <option value="lx2.loc.gov:210/LCDB" selected>Library of Congress</option>  
                                 <option value="ilsz3950.nlm.nih.gov:7091/VOYAGER" selected>U.S. National Library of Medicine (NLM)</option>
