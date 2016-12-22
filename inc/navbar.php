@@ -55,13 +55,14 @@
                 <a class="item">Inglês</a>
               </div>
             </div>
-            -->
+            
             <a class="item" href="contato.php">
               Contato
             </a>
             <div class="item">
                 <a class="ui primary button" style="background-color: #1094AB;" href="login.php">Login</a>
             </div>
+            -->
       </div>
   </div>
 </div>
